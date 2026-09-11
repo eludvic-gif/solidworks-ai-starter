@@ -113,8 +113,9 @@ def build(replace=False):
     properties.last_modified_by = 'solidworks-ai-starter contributors'
     properties.keywords = 'CAD, IA, SOLIDWORKS, validação'
     properties.comments = 'Source SHA256: ' + hashlib.sha256(SOURCE.read_bytes()).hexdigest()
-    properties.created = properties.modified = datetime(2026, 9, 10, tzinfo=timezone.utc)
-    properties.revision = 1
+    properties.created = datetime(2026, 9, 10, tzinfo=timezone.utc)
+    properties.modified = datetime(2026, 9, 11, tzinfo=timezone.utc)
+    properties.revision = 2
     header = section.header.paragraphs[0]
     header.text = 'SOLIDWORKS AI STARTER  /  GUIA DE REPLICAÇÃO'
     header.runs[0].font.size = Pt(8)

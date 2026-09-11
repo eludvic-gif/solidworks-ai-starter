@@ -1,6 +1,6 @@
 # Guia Completo — SOLIDWORKS AI Starter
 
-Referência: **10 de setembro de 2026**. Laboratório replicável para pessoas e agentes de IA, com exemplos sintéticos, sem arquivos de produtos reais. O Word `GUIA-COMPLETO.docx` é gerado desta mesma fonte. Scripts e fontes VBA estão no repo privado https://github.com/eludvic-gif/solidworks-ai-starter.
+Referência: **11 de setembro de 2026**. Laboratório replicável para pessoas e agentes de IA, com exemplos sintéticos, sem arquivos de produtos reais. O Word `GUIA-COMPLETO.docx` é gerado desta mesma fonte. Repositório público: https://github.com/eludvic-gif/solidworks-ai-starter ; fork: https://github.com/ericludvic-79/solidworks-ai-starter. A seção 24 acrescenta o fluxo de desenhos 2D nativos e montagem.
 
 ## 1. Objetivo e limites
 
@@ -41,7 +41,7 @@ Esperado: 5.1, `True`, Python 3.12.x. Outra versão/service pack CAD exige verif
 
 ## 3. Obtendo o repositório
 
-O repo é privado: outra pessoa precisa receber acesso do proprietário. O link sozinho não concede permissão. Entre com sua própria conta GitHub.
+O repo é público: não é necessário convite para ler ou baixar. Para operações autenticadas, use sua própria conta GitHub. O fork na segunda conta não recebe futuras atualizações automaticamente; precisa de sincronização explícita.
 
 ```powershell
 gh auth login
@@ -392,7 +392,7 @@ Não testado é **NÃO TESTADO**, nunca PASS. Copie `docs/SMOKE-TEST.md` para `l
 
 ## 21. O que foi verificado nesta entrega
 
-Fluxo original demonstrado em SOLIDWORKS2025SP5. Nesta preparação: testes Python, guardas estáticas, política de conexão, sintaxe PowerShell, compilação C# com interop local e estrutura/conteúdo Word. Não se abriu, conectou, modelou ou fechou SOLIDWORKS para gerar este kit.
+Na preparação inicial de 2026-09-10: testes Python, guardas estáticas, política de conexão, sintaxe PowerShell, compilação C# com interop local e estrutura/conteúdo Word. Não se abriu, conectou, modelou ou fechou SOLIDWORKS para gerar o kit inicial. Em 2026-09-11 foi acrescentada documentação genérica baseada em operações de desenho demonstradas separadamente no laboratório local; não foram incorporados seus arquivos/modelos privados. A atualização do repositório é documental, sem nova execução CAD para validar o exercício sintético 2D.
 
 Não testado: execução VBA adaptada, relançamento/timeout real, todas versões/idiomas, placa proposta, nova exportação/reimportação, renderização visual Word e resistência física. Detalhamento em `docs/TESTES-DA-ENTREGA.md`. Limitações fazem parte da entrega.
 
@@ -413,3 +413,68 @@ Publicação futura autorizada: conferir `git status --short`, `git diff`, adici
 - python-docx: https://python-docx.readthedocs.io/
 
 Consulte [troubleshooting](TROUBLESHOOTING.md), [validação](VALIDACAO.md), [skills](SKILLS.md), [prompts](prompts/), [checklist de release](RELEASE-CHECKLIST.md) e [smoke test](SMOKE-TEST.md). Para outra IA, forneça este guia, arquivos do kit e instrução para ler AGENTS.md antes de agir.
+
+## 24. Do modelo ao desenho 2D nativo
+
+Este roteiro também integra o Word. O módulo [DESENHOS-2D.md](DESENHOS-2D.md) detalha contratos da API, exemplos e diagnóstico; o [prompt 2D](prompts/05-desenho-2d.md) ajuda a iniciar outra sessão. Não há gerador universal nem arquivos CAD reais incluídos. As operações foram demonstradas em laboratório no SOLIDWORKS 2025 SP5; reproduza um piloto sintético antes de confiar em outra instalação.
+
+### Etapa A — requisitos, padrão e fonte
+
+1. Defina modelo/configuração, material/processo, escopo de fornecimento, interfaces e critérios. Diferencie corpo, acessórios e montagem.
+2. Use DRWDOT/SLDDRT autorizado ou PDF de referência. Confira projeção, folha, escalas, texto, borda e carimbo. Reconstrução simplificada não é reprodução exata; nunca herde assinaturas ou aprovações.
+3. Inventarie PID/documentos/caminhos/configurações/alterações. Copie as fontes para pasta nova, com nomes exclusivos e hashes. Não altere originais nem use ActiveDoc como fallback.
+4. Meça BREP: envelope real, planos de apoio, cilindros, centros, raios, profundidades e fundos. Modelo importado pode não ter cotas de esboço; não medir screenshots.
+5. Monte matriz característica → vista/cota → tolerância → inspeção. Classifique tolerâncias antigas como transferíveis com evidência, propostas ou pendentes. Modelo 3D não fornece sozinho limites de aceitação.
+
+### Etapa B — prova de API e vistas
+
+Confirme assinaturas e enums por reflexão da interop local antes de executar. NewDocument cria desenho por template; retorno nulo/tipo incorreto deve interromper. GetModelViewNames permite descobrir nomes localizados. CreateDrawViewFromModelView3 cria vista associada à fonte; confirme ReferencedConfiguration, escala e posição em metros na folha.
+
+Prove uma vista e uma cota no exercício sintético da placa. Localize duas arestas BREP, limpe a seleção, use View.SelectEntity e AddHorizontalDimension2 ou AddVerticalDimension2. A posição da anotação não define o valor: leia Dimension.SystemValue, compare à geometria, confira Annotation.IsDangling, DisplayDimension.GetOverride e entidades anexadas. Não sobrescreva texto para esconder valor errado. Radial/diametral/quantidade precisam corresponder à entidade real.
+
+Só replique após salvar e reabrir a prova. Vistas ortográficas devem obedecer ao diedro; vistas nomeadas independentes não são automaticamente vistas projetadas alinhadas. No ambiente de referência, modo wireframe (0) mostrava arestas posteriores; hidden-lines-removed (swHIDDEN, 2) foi adequado. Confirme enum, não adivinhe número.
+
+### Etapa C — cortes, detalhes e carimbo
+
+1. Ative vista-pai própria e limpe seleção. Para o corte, transforme pontos modelo → folha → esboço da vista; não misture metros da folha com coordenadas locais do sketch.
+2. Crie linha, selecione-a e chame CreateSectionViewAt5 com opções verificadas. Confira plano, direção, hachura e topologia revelada: retorno não nulo pode esconder corte fora do lugar.
+3. Para detalhe, círculo no esboço correto e CreateDetailViewAt4; confira região, chamada, label e escala. Cote arestas efetivamente visíveis na seção/detalhe.
+4. EditTemplate/EditSheet separam formato e conteúdo. Para linhas curtas, AddToDB pode evitar snapping; preserve/restaure seu estado em finally. Formate texto pela Annotation e confira tamanho físico.
+5. Distribua cotas sem cadeias redundantes e sem texto sobre geometria. Prefira outra folha a reduzir legibilidade. Não omita recurso funcional para o build passar.
+
+### Etapa D — montagem e camadas
+
+Crie SLDASM próprio com componentes autorizados e transformações rígidas; AddComponent5 pode precisar dos modelos carregados. Verifique o caminho retornado e Transform2, sem escala. Fixar componentes não cria mates funcionais. Confirme apoios, direção de inserção, interferências e ordem das camadas; material compressível exige ensaio.
+
+Exemplo exclusivamente sintético: suporte de 12 mm, encaixe de 2 mm, camadas de 6 e 18 mm resultam em altura nominal de 34 mm sem compressão/adesivo. Não extrapole o cálculo para outro conjunto sem medir o apoio. Represente conjunto montado, corte, lista/quantidades, isométrica e sequência. A seleção de arestas de componentes deve respeitar suas coordenadas locais e transformações.
+
+Não chame outra montagem com componentes afastados de configuração explodida nativa: identifique-a como ilustração. O fluxo de passos de explosão nativa não foi validado ponta a ponta neste aprendizado. Balões/BOM, hachuras distintas e fixação real continuam sujeitos à verificação.
+
+### Etapa E — nativo, PDF e pacote
+
+1. Salve SLDDRW em nome novo, conferindo retorno, erros/avisos e existência.
+2. Obtenha ExportPdfData e selecione explicitamente nomes de todas as folhas com SetSheets; array nulo falhou no ambiente de referência. Confira retorno antes de SaveAs.
+3. Reabra cópia do nativo e confira fonte/configuração, vistas não vazias, cotas, vínculos, unidades e erros. Contagem de cotas não prova cobertura.
+4. Renderize e inspecione todas as páginas do PDF: tamanho físico, escalas, símbolos, hachuras, contraste e sobreposição. PDFium com Pillow foi uma opção local; o kit não instala renderizador.
+5. Inspecione GetPackAndGo/GetDocumentNames antes de empacotar. Uma SLDPRT pode depender de STEP por 3D Interconnect. Preserve fontes e confira colisões de nome.
+6. Pack and Go bem-sucedido não prova relink. Audite dependências gravadas e resolvidas, e reabra a entrega em ambiente isolado sem originais. ReplaceReferencedDocument não resolveu todo vínculo Interconnect no laboratório. Se não houver essa prova, declare portabilidade não validada.
+
+### Etapa F — conclusão, limpeza e demonstração
+
+Mantenha PARA REVISÃO — NÃO LIBERADO PARA FABRICAÇÃO enquanto material, tolerâncias, inspeção ou aprovação estiverem pendentes. Entregue matriz de cobertura, fontes/hashes, testes realizados e limitações. A aprovação estética não substitui engenharia.
+
+Depois da validação e com autorização de limpeza, inventarie dependências transitivas e documentos abertos. Remova apenas temporários próprios identificados por caminho e hash, preferencialmente pela Lixeira, mantendo finais, fontes, registros e qualquer arquivo incerto. Igualdade de hash não torna um arquivo removível se ele é referenciado. Feche apenas cópias próprias sem alterações externas. Não configure exclusão automática no evento Stop de um assistente.
+
+Para vídeo, recrie etapas em cópias. Identifique demonstração recriada e capture somente janela CAD por HWND/PID, sem fallback para desktop. Preserve gravações existentes, confira codec/duração/decodificação e quadros; relógio do log não é timecode quando há perda de frames. Capture os clipes novos separadamente, faça prévia em outro arquivo e revise confidencialidade antes de publicar. Vídeo não é evidência de aprovação dimensional nem benchmark de tempo real.
+
+### Checklist 2D adicional
+
+- [ ] Fonte/configuração e padrão local confirmados; cópias com hashes.
+- [ ] Matriz de cobertura e tolerâncias/pendências explícitas.
+- [ ] Piloto de vista/cota associativa salvo e reaberto.
+- [ ] Cortes/detalhes com transformações e regiões conferidas.
+- [ ] Montagem, quantidades, apoios e hipóteses de compressão verificadas, se aplicável.
+- [ ] Todas as folhas PDF e nativas revisadas; sem dangling/override ocultando erro.
+- [ ] Referências do pacote auditadas e portabilidade comprovada ou marcada pendente.
+- [ ] Limpeza autorizada sem apagar fontes/dependências; finais acessíveis.
+- [ ] Nenhuma liberação de fabricação, assinatura ou teste físico inferido.

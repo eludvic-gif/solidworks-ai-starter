@@ -171,6 +171,25 @@ Se você quiser avaliar skills de terceiros relacionadas a CAD/automação, veja
 [docs/SKILLS.md](docs/SKILLS.md) antes de instalar qualquer coisa — nenhuma
 delas foi incorporada a este repositório.
 
+## Desenhos 2D, montagem e encerramento
+
+Leia [docs/DESENHOS-2D.md](docs/DESENHOS-2D.md) antes de implementar um driver
+SLDDRW. O módulo descreve operações de API demonstradas, não fornece o driver
+privado nem autoriza copiar dados do laboratório para este repositório.
+
+- Meça o modelo/configuração e prove uma vista/cota associativa antes de replicar.
+- Confirme nomes localizados, enums e referenciais modelo/folha/esboço; retorno
+  não nulo de corte/detalhe não comprova plano ou região corretos.
+- Não fabrique tolerâncias, datum, revisão ou aprovação; pendências impedem liberação.
+- Reabra nativo, confira cotas e todas as páginas do PDF. Pack and Go não prova
+  portabilidade; audite vínculos Interconnect e reabra a cópia sem fontes originais.
+- Limpeza exige autorização pertinente, inventário/dependências e seleção exata
+  dos temporários próprios; prefira Lixeira e registre hashes. Nunca apague por
+  extensão/wildcard ou porque o nome parece antigo. Um lembrete de hook não é
+  prova de término nem autorização genérica para exclusão automática.
+- Vídeo novo deve usar cópias, captura exclusiva da janela e indicação de
+  demonstração recriada; sem modificar gravações existentes ou publicar CAD.
+
 ## Para outros agentes de IA (não Claude Code)
 
 Este arquivo foi escrito para ser lido manualmente por qualquer agente, humano

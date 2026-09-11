@@ -6,7 +6,12 @@ no seu computador. Não há PLM, não há rede corporativa, não há dados de pr
 real — tudo aqui é sintético (um cone de teste e uma placa de teste) e serve para
 aprender o fluxo com segurança antes de tocar em qualquer peça de verdade.
 
-Versão de referência desta documentação: **2026-09-10**.
+Versão de referência desta documentação: **2026-09-11**.
+
+**Novo módulo:** [desenhos 2D nativos e montagem](docs/DESENHOS-2D.md), com
+passo a passo de vistas, cotas associativas, cortes, detalhes, PDF, reabertura,
+referências, limpeza autorizada e demonstrações em vídeo. É um procedimento
+para desenvolver/testar o driver local, não um gerador universal pronto.
 
 ## O que este kit é (e o que não é)
 
@@ -40,8 +45,12 @@ seu ambiente. Veja o passo a passo completo em
 
 ## Obtendo o repositório
 
-Este é um repositório privado (`eludvic-gif/solidworks-ai-starter`). Duas formas
-de obter os arquivos, ambas exigindo que você já tenha convite/acesso liberado:
+O repositório é **público**, disponível nas duas contas:
+
+- [eludvic-gif/solidworks-ai-starter](https://github.com/eludvic-gif/solidworks-ai-starter) — origem.
+- [ericludvic-79/solidworks-ai-starter](https://github.com/ericludvic-79/solidworks-ai-starter) — fork.
+
+Não é necessário convite para leitura. Duas formas de obter os arquivos:
 
 1. Via GitHub CLI:
    ```powershell
@@ -134,6 +143,8 @@ Detalhes completos em [AGENTS.md](AGENTS.md) e
 | [docs/GUIA-COMPLETO.md](docs/GUIA-COMPLETO.md) | Pessoa leiga e IA | Guia principal, autossuficiente |
 | [docs/TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md) | Qualquer um | Erros e recuperação |
 | [docs/VALIDACAO.md](docs/VALIDACAO.md) | Qualquer um | Metodologia de validação dimensional |
+| [docs/DESENHOS-2D.md](docs/DESENHOS-2D.md) | Pessoa e IA | Desenho nativo, montagem, PDF e validação de referências |
+| [docs/prompts/05-desenho-2d.md](docs/prompts/05-desenho-2d.md) | Pessoa e IA | Briefing copiável para desenvolver o desenho |
 | [docs/SKILLS.md](docs/SKILLS.md) | Qualquer um | Skills externas opcionais (não instaladas) |
 | [docs/prompts/](docs/prompts/) | Qualquer um | Prompts copiáveis para o agente de IA |
 

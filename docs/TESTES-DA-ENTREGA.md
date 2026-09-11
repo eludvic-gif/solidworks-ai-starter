@@ -1,4 +1,17 @@
-# Verificações da entrega — 2026-09-10
+# Verificações da entrega
+
+## Atualização documental — 2026-09-11
+
+- Adicionado módulo de desenhos 2D nativos, montagem, cotas/cortes/detalhes, PDF/reabertura, referências, limpeza autorizada e vídeo demonstrativo. Incluídos prompt copiável e seção autossuficiente no guia/Word.
+- Corrigido acesso público e documentadas as duas contas. Fork requer sincronização explícita, não automática.
+- **48 testes Python PASS:** 43 anteriores e 5 contratos documentais. Os novos testes checam presença/coerência dos passos e limites; não executam CAD nem provam precisão de uma peça.
+- Scanner de release: **39 arquivos PASS**, junto da revisão manual do conteúdo novo. Nenhuma peça, medida proprietária, captura, vídeo, configuração local ou driver específico do laboratório foi incluído.
+- Sintaxe PowerShell + 11 decisões puras de conexão: **PASS**. Compilação C# foi explicitamente **SKIPPED** nesta execução sem ConfigPath; não houve mudança no cliente de conexão.
+- Word regenerado com python-docx 1.2.0; texto em ordem, hash da fonte e ausência de embeddings/relacionamentos externos conferidos pela suíte. Paginação visual em editor de escritório não foi inspecionada.
+- Evidência histórica separada: as operações de vista, cota associativa, corte, detalhe, montagem posicionada e exportação PDF foram demonstradas no laboratório local em SOLIDWORKS 2025 SP5. O exercício sintético publicado NÃO foi executado ponta a ponta nesta atualização. Não foi publicado um novo gerador CAD.
+- Limitações preservadas: tolerâncias/liberação de fabricação não inferidas; explosão nativa e portabilidade de referências Interconnect não declaradas como resolvidas; vídeo recriado não representa o tempo real completo de execução.
+
+## Registro inicial — 2026-09-10
 
 ## Executado nesta preparação
 
