@@ -6,7 +6,12 @@ no seu computador. Não há PLM, não há rede corporativa, não há dados de pr
 real — tudo aqui é sintético (um cone de teste e uma placa de teste) e serve para
 aprender o fluxo com segurança antes de tocar em qualquer peça de verdade.
 
-Versão de referência desta documentação: **2026-09-11**.
+Versão de referência desta documentação: **2026-09-12**.
+
+**Base de conhecimento preservada:** [normas e revisão técnica 2D](docs/NORMAS-2D.md),
+[registro de edições/fontes](standards/registry.json), verificador Python offline,
+exemplo sintético e testes. Sem redistribuir normas; não certifica conformidade
+nem libera fabricação.
 
 **Novo módulo:** [desenhos 2D nativos e montagem](docs/DESENHOS-2D.md), com
 passo a passo de vistas, cotas associativas, cortes, detalhes, PDF, reabertura,
@@ -145,6 +150,9 @@ Detalhes completos em [AGENTS.md](AGENTS.md) e
 | [docs/VALIDACAO.md](docs/VALIDACAO.md) | Qualquer um | Metodologia de validação dimensional |
 | [docs/DESENHOS-2D.md](docs/DESENHOS-2D.md) | Pessoa e IA | Desenho nativo, montagem, PDF e validação de referências |
 | [docs/prompts/05-desenho-2d.md](docs/prompts/05-desenho-2d.md) | Pessoa e IA | Briefing copiável para desenvolver o desenho |
+| [docs/NORMAS-2D.md](docs/NORMAS-2D.md) | Pessoa e IA | Base normativa, crivo interno, CLI e limites de evidência |
+| [standards/registry.json](standards/registry.json) | Pessoa e IA | Edições, fontes e substituições; não inclui as normas |
+| [docs/prompts/06-revisao-normativa.md](docs/prompts/06-revisao-normativa.md) | Pessoa e IA | Continuidade e atualização do conhecimento |
 | [docs/SKILLS.md](docs/SKILLS.md) | Qualquer um | Skills externas opcionais (não instaladas) |
 | [docs/prompts/](docs/prompts/) | Qualquer um | Prompts copiáveis para o agente de IA |
 

@@ -190,6 +190,26 @@ privado nem autoriza copiar dados do laboratório para este repositório.
 - Vídeo novo deve usar cópias, captura exclusiva da janela e indicação de
   demonstração recriada; sem modificar gravações existentes ou publicar CAD.
 
+## Base normativa e revisão estruturada 2D
+
+Antes de novas revisões técnicas, leia [docs/NORMAS-2D.md](docs/NORMAS-2D.md) e
+[standards/registry.json](standards/registry.json). Use o verificador
+`tools/review_drawing.py` somente com metadados/evidências reais autorizados e saída
+nova; o exemplo JSON é sintético, com hash/tolerâncias/afirmações inventados para teste.
+
+- Registre edição exata, data, acesso e contrato. Catálogo, prefácio, sumário e
+  trecho parcial não equivalem ao texto integral. Não invente cláusulas.
+- Não migre desenhos legados por substituição automática de número de norma.
+- Campos de material, inspeção, datum e tolerância exigem fundamento; nunca
+  preenchê-los artificialmente para passar os testes.
+- O verificador não mede CAD nem autentica evidência. `review_required`, exit 0
+  e `iso_compliant=null` NÃO são aprovação, conformidade ou liberação de fabricação.
+- Preserve somente resumos próprios, links, código e testes no kit público.
+  Não incorporar PDFs/prévias, scans, extrações ou tabelas de normas; ser acessível
+  publicamente não transfere direitos de redistribuição.
+- Para atualizar a base, revalide fontes e testes. Não acessar bibliotecas privadas,
+  comprar normas ou publicar sem autorização específica.
+
 ## Para outros agentes de IA (não Claude Code)
 
 Este arquivo foi escrito para ser lido manualmente por qualquer agente, humano

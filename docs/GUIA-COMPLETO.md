@@ -1,6 +1,6 @@
 # Guia Completo — SOLIDWORKS AI Starter
 
-Referência: **11 de setembro de 2026**. Laboratório replicável para pessoas e agentes de IA, com exemplos sintéticos, sem arquivos de produtos reais. O Word `GUIA-COMPLETO.docx` é gerado desta mesma fonte. Repositório público: https://github.com/eludvic-gif/solidworks-ai-starter ; fork: https://github.com/ericludvic-79/solidworks-ai-starter. A seção 24 acrescenta o fluxo de desenhos 2D nativos e montagem.
+Referência: **12 de setembro de 2026**. Laboratório replicável para pessoas e agentes de IA, com exemplos sintéticos, sem arquivos de produtos reais. O Word `GUIA-COMPLETO.docx` é gerado desta mesma fonte. Repositório público: https://github.com/eludvic-gif/solidworks-ai-starter ; fork: https://github.com/ericludvic-79/solidworks-ai-starter. A seção 24 acrescenta o fluxo de desenhos 2D nativos e montagem.
 
 ## 1. Objetivo e limites
 
@@ -478,3 +478,22 @@ Para vídeo, recrie etapas em cópias. Identifique demonstração recriada e cap
 - [ ] Referências do pacote auditadas e portabilidade comprovada ou marcada pendente.
 - [ ] Limpeza autorizada sem apagar fontes/dependências; finais acessíveis.
 - [ ] Nenhuma liberação de fabricação, assinatura ou teste físico inferido.
+
+## 25. Preservação do conhecimento normativo e revisão 2D
+
+O módulo [NORMAS-2D.md](NORMAS-2D.md) e o registro `standards/registry.json` preservam 20 registros de normas, incluindo históricos, e 8 relações de substituição. São metadados e resumos originais: normas integrais, prévias PDF, extrações e dados privados não acompanham o kit. A consulta de 2026-09-12 usou catálogo e prévias oficiais parciais; nenhuma norma foi lida integralmente. Não confundir ano nacional/ISO, sumário/cláusula lida ou sucessão documental/equivalência técnica.
+
+Principais atualizações identificadas: ISO 5459:2024 substitui 2011; ISO 14405-1:2025 substitui 2016; ISO 22081:2021 substitui ISO 2768-2:1989, não a parte 1; ISO 21920-1:2021 substitui ISO 1302:2002. A família 128 tem partes próprias para linhas e vistas/cortes. Ver fontes e limites no registro. Não alterar automaticamente notas de desenhos legados: a edição contratual pode continuar aplicável mediante revisão explícita.
+
+Para novas revisões, estabelecer fonte/configuração/revisão, material/processo e baseline de edições. Construir requisito → característica → vista/cota → aceitação → inspeção. Justificar vista principal, verificar projeção/símbolo/disposição e associatividade. Revisar datums conforme função/inspeção; não inventar tolerância a partir de casas decimais nem preencher evidência para satisfazer teste.
+
+O verificador `tools/review_drawing.py` processa JSON local com o perfil interno engineering_v2. Verifica estrutura, vínculos, IDs, valores, tolerâncias, edições e evidências declaradas; não mede CAD, não autentica declarações, não implementa todas as regras ISO e não certifica fabricação. A CLI usa somente Python padrão, sem rede ou conexão COM, e recusa sobrescrita:
+
+```powershell
+if (-not (Test-Path output)) { New-Item -ItemType Directory output }
+python tools/review_drawing.py examples/drawing-review.synthetic.json output/drawing-review.json
+```
+
+O exemplo contém dados inventados exclusivamente para teste, inclusive hash, material, tolerâncias e afirmações de revisão. Não é evidência de um desenho real. Resultado esperado: review_required, release=NOT_AUTHORIZED e iso_compliant=null. Exit 0 significa processamento sem bloqueios estruturais, não aprovação; exit 2 significa bloqueio. Reutilização exige substituir afirmações por evidência verdadeira e manter revisão humana/normativa.
+
+Preservar o método no Git permite recuperar conhecimento em outra máquina ou sessão; não retreina permanentemente a IA. Para atualizar, confirmar fontes oficiais/edições, registrar nível real de acesso e alterações, executar testes negativos, revisar privacidade e publicar só quando autorizado. Fontes licenciadas/evidências reais ficam fora do repo. Não contornar paywall ou redistribuir normas. Use [prompts/06-revisao-normativa.md](prompts/06-revisao-normativa.md) para orientar a próxima sessão.

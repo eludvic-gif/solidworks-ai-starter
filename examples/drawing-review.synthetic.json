@@ -1,0 +1,78 @@
+{
+  "units": "mm",
+  "regime": "ISO_GPS",
+  "projection": "third_angle",
+  "source": {
+    "model_id": "synthetic",
+    "revision": "A",
+    "configuration": "Default",
+    "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  },
+  "material": {
+    "designation": "Synthetic test material",
+    "specification_basis": "Unit fixture only, not production"
+  },
+  "process_basis": "Synthetic test, no fabrication",
+  "titleblock": {
+    "document_id": "TEST",
+    "revision": "A",
+    "title": "Synthetic test",
+    "sheet_count": 1,
+    "status": "review"
+  },
+  "sheets": [
+    {
+      "id": "s1",
+      "scale": [
+        2,
+        1
+      ],
+      "projection_symbol": "third_angle",
+      "projection_layout_reviewed": true,
+      "views": [
+        {
+          "id": "front",
+          "type": "principal",
+          "empty": false,
+          "selection_reason": "Mounting interface visible"
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d1",
+          "view_id": "front",
+          "feature_id": "width",
+          "characteristic_id": "width-size",
+          "role": "controlling",
+          "value_si": 0.02,
+          "dangling": false,
+          "overridden": false,
+          "tolerance": {
+            "kind": "limits",
+            "lower_si": 0.0199,
+            "upper_si": 0.0201
+          }
+        }
+      ]
+    }
+  ],
+  "requirements": [
+    {
+      "id": "r1",
+      "dimension_ids": [
+        "d1"
+      ],
+      "functional_reason": "Synthetic fit",
+      "inspection_method": "Measure opposing faces"
+    }
+  ],
+  "standards": [
+    {
+      "designation": "ISO 128-3:2022"
+    }
+  ],
+  "pdf_all_sheets_reviewed": true,
+  "native_reopen_verified": true,
+  "synthetic_example": true,
+  "notice": "TEST DATA ONLY: invented hash, tolerances and review assertions; no actual drawing or approved material"
+}
